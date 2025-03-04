@@ -46,7 +46,7 @@ Placematics/
 ## **🚀 Installation & Setup**
 ### **1️⃣ Clone the repository**
 ```sh
-git clone https://github.com/your-username/Placematics.git
+git clone https://github.com/pawantalekar/Placematics.git
 cd Placematics
 ```
 
@@ -91,7 +91,7 @@ Visit **`http://127.0.0.1:8000/`** to access the app.
 ---
 
 ## **🖼️ Screenshots**
-📌 *Include some screenshots of your project here to make it visually appealing*  
+📌 *will be included soon..just wait for it okay...!!!*  
 *(e.g., Dashboard, Student Profile, Analytics Page, etc.)*
 
 ---
