@@ -24,12 +24,32 @@
 
 # placements/models.py
 from django.conf import settings
-import datetime
 from django.db import models
+import datetime
+from django.contrib.auth import get_user_model
 
+User = get_user_model()
+
+def get_default_user():
+    """Returns the first user in the database if exists, else None."""
+    return User.objects.first().id if User.objects.exists() else None
+
+# Company Model
+class Company(models.Model):
+    name = models.CharField(max_length=255, unique=True)
+    location = models.CharField(max_length=255, blank=True, null=True)
+
+    def __str__(self):
+        return self.name
+
+# PlacedStudent Model
 class PlacedStudent(models.Model):
-    student = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, default=1)
-    company = models.ForeignKey('Company', on_delete=models.CASCADE)
+    student = models.ForeignKey(
+        settings.AUTH_USER_MODEL, 
+        on_delete=models.CASCADE, 
+        default=get_default_user  # Uses the first available user as default
+    )
+    company = models.ForeignKey(Company, on_delete=models.CASCADE)  # Ensure Company exists before referencing it
     placement_date = models.DateField(default=datetime.date.today)
     role = models.CharField(max_length=255, default="Unknown Role")
     salary = models.DecimalField(max_digits=10, decimal_places=2, default=0.00)
@@ -41,12 +61,3 @@ class PlacedStudent(models.Model):
 
     def __str__(self):
         return f"{self.student} - {self.company}"
-
-
-class Company(models.Model):
-    name = models.CharField(max_length=255, unique=True)
-    location = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-

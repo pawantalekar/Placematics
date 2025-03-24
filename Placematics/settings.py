@@ -91,7 +91,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 # settings.py
 
-LOGIN_URL = 'users:login'  # Redirect to home page after successful login
+LOGIN_URL = 'users/login'  # Redirect to home page after successful login
 LOGOUT_REDIRECT_URL = 'dashboard:landing'  # Redirect to landing page (index.html) after logout
 AUTH_USER_MODEL = 'users.CustomUser'
 # Internationalization
@@ -100,13 +100,19 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent.parent
+
 STATIC_URL = '/static/'
+
 STATICFILES_DIRS = [
-    BASE_DIR / 'placements/static',   # Static files for placements app
-    BASE_DIR / 'dashboard/static',    # Static files for dashboard app
-    BASE_DIR / 'users/static',        # Static files for users app
+    (BASE_DIR / 'placements/static').resolve(),
+    (BASE_DIR / 'dashboard/static').resolve(),
+    (BASE_DIR / 'users/static').resolve(),
 ]
+
+STATIC_ROOT = BASE_DIR / 'staticfiles'  # Required for collectstatic
 
 # Media files (Uploaded images like student photos)
 MEDIA_URL = '/media/'

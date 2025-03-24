@@ -42,17 +42,20 @@
                 <li class="nav-item"><a class="nav-link text-white" href="#">Jobs</a></li>
                 <li class="nav-item"><a class="nav-link text-white" href="{% url 'contact' %}">Contact</a></li>
             </ul>
-            
+
+            <!-- Add Placement Button in Navbar -->
+            <a href="{% url 'add_placement' %}" class="btn btn-success me-3">+ Add Placement</a>
+
             <!-- Profile Dropdown -->
             <div class="dropdown">
                 <button class="btn btn-outline-light dropdown-toggle d-flex align-items-center" type="button" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{% static 'dashboard/images/default_profile.png' %}" alt="Profile" class="rounded-circle" width="40" height="40">
+                    <img src="{% static 'dashboard/images/default_profile.jpg' %}" alt="Profile" class="rounded-circle" width="40" height="40">
                 </button>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
                     <li><a class="dropdown-item" href="#">View Profile</a></li>
                     <li><a class="dropdown-item" href="#">Edit Profile</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item text-danger" href="{% url 'logout' %}">Logout</a></li>
+                    <li><a class="dropdown-item text-danger" href="{% url 'users:logout' %}">Logout</a></li>
                 </ul>
             </div>
         </nav>
@@ -60,20 +63,32 @@
 
     <!-- Dashboard Content -->
     <div class="container mt-5">
-        <h2 class="text-center">Placed Students</h2>
-        <div class="row">
-            <p class="text-center">Placed students will be displayed here.</p>
+        <div class="d-flex justify-content-between align-items-center">
+            <h2 class="text-center">Placed Students</h2>
+            <!-- Add Placement Button in Content Area -->
+            <a href="{% url 'add_placement' %}" class="btn btn-primary">+ Add Placement</a>
+        </div>
+
+        <div class="row mt-3">
+            {% if placed_students %}
+                {% for student in placed_students %}
+                <div class="col-md-4 mb-4">
+                    <div class="card shadow-sm">
+                        <div class="card-body text-center">
+                            <img src="{{ student.profile_pic.url }}" alt="Profile Picture" class="rounded-circle mb-3" width="80">
+                            <h5 class="card-title">{{ student.student.username }}</h5>
+                            <p class="card-text">Placed at: <strong>{{ student.company }}</strong></p>
+                            <p class="text-muted">Role: {{ student.role }}</p>
+                            <p class="text-muted">Salary: ${{ student.salary }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-center">No placed students available.</p>
+            {% endif %}
         </div>
     </div>
-
-    {% for student in placed_students %}
-    <div class="card">
-        <img src="{{ student.profile_pic.url }}" alt="Profile Picture" width="100">
-        <h3>{{ student.student.username }}</h3>
-        <p>Placed at: {{ student.company }}</p>
-    </div>
-    {% endfor %}
-
 
     <!-- Sticky Footer -->
     <footer class="text-center mt-5 py-3">

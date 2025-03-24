@@ -21,7 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", landing_page, name="index"), 
     path('', include('dashboard.urls')),  # Dashboard app for landing page and home page
-    path('users/', include('users.urls')),  # Users app for login/logout and profile
+    path('users/', include('users.urls', namespace='users')),   # Users app for login/logout and profile
     path('placements/', include('placements.urls')),  # Placements app for placement tracking
 ]
 

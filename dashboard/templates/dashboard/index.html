@@ -63,11 +63,11 @@
                             <span class="nav-link text-white">Hello, <strong>{{ user.username }}</strong></span>
                         </li>
                         <li class="nav-item">
-                            <a class="btn btn-outline-danger btn-sm ms-2" href="{% url 'logout' %}">Logout</a>
+                            <a class="btn btn-outline-danger btn-sm ms-2" href="{% url 'users:logout' %}">Logout</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
-                            <a class="btn btn-outline-primary btn-sm ms-2" href="{% url 'login' %}">Login</a>
+                            <a class="btn btn-outline-primary btn-sm ms-2" href="{% url 'users:login' %}">Login</a>
                         </li>
                     {% endif %}
                 </ul>
@@ -80,7 +80,7 @@
         <h1>Welcome to Placematics</h1>
         <p class="lead">A smart platform for tracking placements, analyzing student progress, and providing real-time insights.</p>
         {% if not user.is_authenticated %}
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Get Started</a>
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg">Get Started</a>
         {% else %}
             <a href="{% url 'home' %}" class="btn btn-success btn-lg">Go to Dashboard</a>
         {% endif %}
@@ -115,8 +115,7 @@
         <h2>Start Tracking Placements Now!</h2>
         <p>Join us today and streamline the placement process.</p>
         {% if not user.is_authenticated %}
-            <a href="{% url 'login' %}" class="btn btn-primary btn-lg">Login</a>
-           
+            <a href="{% url 'users:login' %}" class="btn btn-primary btn-lg">Login</a>
         {% else %}
             <a href="{% url 'home' %}" class="btn btn-success btn-lg">Go to Dashboard</a>
         {% endif %}
