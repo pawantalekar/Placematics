@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}Student Profile - {{ student.user.username }}{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-md-8">
+        <div class="card shadow-sm">
+            <div class="card-header bg-dark text-white">
+                <h3 class="mb-0">Student Profile: {{ student.user.username }}</h3>
+            </div>
+            <div class="card-body">
+                <dl class="row">
+                    <dt class="col-sm-3">Username:</dt>
+                    <dd class="col-sm-9">{{ student.user.username }}</dd>
+                    <dt class="col-sm-3">Batch:</dt>
+                    <dd class="col-sm-9">{{ student.batch.year }}</dd>
+                    <dt class="col-sm-3">10th %:</dt>
+                    <dd class="col-sm-9">{{ student.tenth_percent|default:'Not Provided' }}</dd>
+                    <dt class="col-sm-3">12th %:</dt>
+                    <dd class="col-sm-9">{{ student.twelfth_percent|default:'Not Provided' }}</dd>
+                    <dt class="col-sm-3">Graduation %:</dt>
+                    <dd class="col-sm-9">{{ student.graduation_percent|default:'Not Provided' }}</dd>
+                    <dt class="col-sm-3">Placement Status:</dt>
+                    <dd class="col-sm-9">{{ student.placement_status }}</dd>
+                    <dt class="col-sm-3">Package:</dt>
+                    <dd class="col-sm-9">{{ student.package|default:'Not Provided' }}</dd>
+                </dl>
+                <a href="{% url 'teacher_dashboard' %}" class="btn btn-secondary mt-3"><i class="fas fa-arrow-left"></i> Back to Dashboard</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

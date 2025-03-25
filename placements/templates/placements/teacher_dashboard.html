@@ -37,15 +37,19 @@
                         <thead class="table-dark">
                             <tr>
                                 <th>Username</th>
-                                <th>Batch</th>
+                                <th>Name</th> <!-- Changed from "Batch" to "Name" -->
                                 <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             {% for student in students %}
                             <tr>
-                                <td>{{ student.user.username }}</td>
-                                <td>{{ student.batch.year }}</td>
+                                <td>
+                                    <a href="{% url 'student_profile' student.id %}" class="text-decoration-none">
+                                        {{ student.user.username }}
+                                    </a>
+                                </td>
+                                <td>{{ student.user.first_name }} {{ student.user.last_name }}</td> <!-- Display Name -->
                                 <td>
                                     <a href="{% url 'delete_student' student.id %}" class="btn btn-danger btn-sm" 
                                        onclick="return confirm('Are you sure?')"><i class="fas fa-trash"></i> Delete</a>
